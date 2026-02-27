@@ -22,7 +22,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
+    public Patient updatePatient(@PathVariable("id") Long id, @RequestBody Patient patient) {
         return patientService.updatePatient(id, patient);
     }
 
@@ -32,7 +32,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}/history")
-    public com.healthreach.healthreach.dto.PatientHistoryDTO getPatientHistory(@PathVariable Long id) {
+    public com.healthreach.healthreach.dto.PatientHistoryDTO getPatientHistory(@PathVariable("id") Long id) {
         return patientService.getPatientHistory(id);
     }
 }

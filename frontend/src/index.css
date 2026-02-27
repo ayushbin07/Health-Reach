@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-500: #0891B2;
+  --color-primary-600: #164E63;
+  --color-secondary-400: #22D3EE;
+  --color-success-500: #059669;
+  --color-background: #F0FDFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  background-color: #F0FDFF;
+  color: #164E63;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Lexend", system-ui, sans-serif;
+}

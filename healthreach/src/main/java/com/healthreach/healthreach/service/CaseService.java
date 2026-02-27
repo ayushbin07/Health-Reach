@@ -20,8 +20,8 @@ public class CaseService {
     private final SpecialistRepository specialistRepository;
 
     public CaseService(CaseRepository caseRepository,
-                       PatientRepository patientRepository,
-                       SpecialistRepository specialistRepository) {
+            PatientRepository patientRepository,
+            SpecialistRepository specialistRepository) {
         this.caseRepository = caseRepository;
         this.patientRepository = patientRepository;
         this.specialistRepository = specialistRepository;
@@ -34,15 +34,19 @@ public class CaseService {
 
         double score = 0;
 
-        if (Boolean.TRUE.equals(medicalCase.getFever())) score += 3;
+        if (Boolean.TRUE.equals(medicalCase.getFever()))
+            score += 3;
 
         if (Boolean.TRUE.equals(medicalCase.getCough())
                 && medicalCase.getCoughDurationDays() != null
-                && medicalCase.getCoughDurationDays() > 14) score += 4;
+                && medicalCase.getCoughDurationDays() > 14)
+            score += 4;
 
-        if (Boolean.TRUE.equals(medicalCase.getBreathlessness())) score += 3;
+        if (Boolean.TRUE.equals(medicalCase.getBreathlessness()))
+            score += 3;
 
-        if (Boolean.TRUE.equals(medicalCase.getUnconscious())) score += 10;
+        if (Boolean.TRUE.equals(medicalCase.getUnconscious()))
+            score += 10;
 
         medicalCase.setTriageScore(score);
 
@@ -50,7 +54,7 @@ public class CaseService {
         LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
         long recentCasesInDistrict = caseRepository.countByPatientDistrictAndCreatedAtAfter(
                 patient.getDistrict(), twentyFourHoursAgo);
-        
+
         medicalCase.setIsOutbreakSpike(recentCasesInDistrict >= 5);
 
         if (score >= 10) {
@@ -59,29 +63,30 @@ public class CaseService {
             medicalCase.setAction("AMBULANCE_DISPATCHED");
             int minResponse = 10;
             int maxResponse = 25;
-            medicalCase.setEmergencyResponseTime(minResponse + (int)(Math.random() * ((maxResponse - minResponse) + 1)));            
+            medicalCase
+                    .setEmergencyResponseTime(minResponse + (int) (Math.random() * ((maxResponse - minResponse) + 1)));
 
         } else if (score >= 6) {
             medicalCase.setSeverity("Urgent");
             medicalCase.setAction("SPECIALIST_CONSULTATION");
             assignSpecialist(medicalCase, patient);
-            
+
         } else {
             medicalCase.setSeverity("Routine");
             medicalCase.setAction("AI_DIAGNOSIS");
-            
+
             // Feature 3: Autonomous Diagnostic AI
-            if (Boolean.TRUE.equals(medicalCase.getFever()) && 
-                medicalCase.getCoughDurationDays() != null && 
-                medicalCase.getCoughDurationDays() > 14) {
-                
+            if (Boolean.TRUE.equals(medicalCase.getFever()) &&
+                    medicalCase.getCoughDurationDays() != null &&
+                    medicalCase.getCoughDurationDays() > 14) {
+
                 medicalCase.setDiagnosis("Tuberculosis (TB)");
                 medicalCase.setConfidence(0.92);
             } else {
                 medicalCase.setDiagnosis("Viral Fever");
                 medicalCase.setConfidence(0.75);
             }
-            
+
             if (medicalCase.getConfidence() < 0.85) {
                 String currentAction = medicalCase.getAction() == null ? "" : medicalCase.getAction() + " - ";
                 medicalCase.setAction(currentAction + "ESCALATED_TO_SPECIALIST");
@@ -104,8 +109,8 @@ public class CaseService {
                 .orElse(null);
 
         if (best != null) {
-            String currentAction = medicalCase.getAction() == null ? "" : medicalCase.getAction() + " - ";
-            medicalCase.setAction(currentAction + "ASSIGNED_TO_" + best.getName().replace(" ", "_"));
+            medicalCase.setAction((medicalCase.getAction() == null ? "" : medicalCase.getAction() + " - ")
+                    + "ASSIGNED_TO_" + best.getName().replace(" ", "_"));
         }
     }
 

@@ -3,10 +3,10 @@ POST http://localhost:8080/api/patients
 Content-Type: application/json
 
 {
-  "name": "Ayushi",
+  "name": "Meow",
   "age": 20,
   "gender": "Female",
-  "language": "Tamil",
+  "language": "Hindi",
   "district": "Palghar"
 }
 

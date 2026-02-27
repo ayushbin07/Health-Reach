@@ -15,8 +15,8 @@ public class CaseController {
     }
 
     @PostMapping("/{patientId}")
-    public Case createCase(@PathVariable Long patientId,
-                           @RequestBody Case medicalCase) {
+    public Case createCase(@PathVariable("patientId") Long patientId,
+            @RequestBody Case medicalCase) {
         return caseService.createCase(patientId, medicalCase);
     }
 }

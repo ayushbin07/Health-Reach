@@ -26,6 +26,9 @@ public class Case {
     private Boolean breathlessness;
     private Boolean unconscious;
 
+    @Column(columnDefinition = "TEXT")
+    private String remarks;
+
     // --- Calculated Fields ---
     private String severity;
     private Double triageScore;
