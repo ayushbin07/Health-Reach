@@ -8,6 +8,8 @@ import PatientIntake from './pages/PatientIntake'
 import TriageAI from './pages/TriageAI'
 import Dashboard from './pages/Dashboard'
 import Patients from './pages/Patients'
+import DoctorPanel from './pages/DoctorPanel'
+import Analytics from './pages/Analytics'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +30,8 @@ function AppRoutes() {
       <Route path="/role" element={<RoleSelect />} />
       <Route path="/intake" element={<PatientIntake />} />
       <Route path="/triage" element={<TriageAI />} />
+      <Route path="/doctor" element={<DoctorPanel />} />
+      <Route path="/analytics" element={<Analytics />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/patients" element={<Patients />} />
     </Routes>

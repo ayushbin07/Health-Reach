@@ -1,29 +1,91 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-500: #0891B2;
-  --color-primary-600: #164E63;
-  --color-secondary-400: #22D3EE;
-  --color-success-500: #059669;
-  --color-background: #F0FDFF;
+  /* ─── Brand Palette ─────────────────────────────── */
+  --color-brand-900: #0C3547;
+  --color-brand-700: #164E63;
+  --color-brand-500: #0891B2;
+  --color-brand-300: #67E8F9;
+  --color-brand-100: #CFFAFE;
+  --color-brand-50: #F0FDFF;
+  --color-success: #059669;
+
+  /* ─── Typography ────────────────────────────────── */
+  --font-heading: "Lexend", system-ui, sans-serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
 }
 
-* {
+/* ─── Reset ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Source Sans 3", system-ui, sans-serif;
-  background-color: #F0FDFF;
-  color: #164E63;
-  min-height: 100vh;
+  font-family: var(--font-body);
+  background: #ffffff;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: "Lexend", system-ui, sans-serif;
+  font-family: var(--font-heading);
+}
+
+/* ─── Utilities ─────────────────────────────────────── */
+.section-tag {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0891B2;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ─── Form controls used across PatientIntake ─────── */
+.label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  outline: none;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: white;
+  color: #0F172A;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus {
+  border-color: #0891B2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.12);
 }

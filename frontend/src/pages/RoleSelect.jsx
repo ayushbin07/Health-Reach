@@ -1,53 +1,81 @@
 import { useNavigate } from 'react-router-dom';
-import { User, Stethoscope, ArrowLeft } from 'lucide-react';
+import { User, Stethoscope, ArrowLeft, ChevronRight } from 'lucide-react';
+
+const C = {
+    teal900: '#0C3547',
+    teal700: '#164E63',
+    teal500: '#0891B2',
+    teal100: '#CFFAFE',
+    teal50: '#F0FDFF',
+    slate600: '#475569',
+    white: '#FFFFFF',
+};
 
 export default function RoleSelect() {
     const nav = useNavigate();
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center px-4" style={{ background: '#F0FDFF' }}>
+        <div style={{ minHeight: '100vh', background: `linear-gradient(160deg, ${C.teal50} 0%, ${C.white} 60%)`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', fontFamily: "'Source Sans 3', system-ui, sans-serif" }}>
+
+            {/* Back */}
             <button onClick={() => nav('/')}
-                className="absolute top-6 left-6 flex items-center gap-1.5 text-sm text-slate-500 hover:text-primary-600 transition-colors cursor-pointer">
-                <ArrowLeft className="w-4 h-4" /> Back
+                style={{ position: 'absolute', top: 28, left: 28, display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: C.slate600, background: 'none', border: 'none', cursor: 'pointer' }}>
+                <ArrowLeft size={16} /> Back
             </button>
 
-            <div className="text-center mb-12">
-                <h2 className="text-3xl font-heading font-bold text-primary-600">Who are you?</h2>
-                <p className="text-slate-500 mt-2">Choose your role to continue</p>
+            {/* Header */}
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+                <p style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.teal500, marginBottom: 10 }}>+ ENTER PLATFORM</p>
+                <h1 style={{ fontFamily: "'Lexend', sans-serif", fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 800, color: C.teal900, lineHeight: 1.2 }}>
+                    How are you<br />using HealthReach?
+                </h1>
+                <p style={{ fontSize: 15, color: C.slate600, marginTop: 12 }}>Choose your role to continue to the right experience.</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6">
+            {/* Cards */}
+            <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
                 <RoleCard
-                    icon={<User className="w-10 h-10" />}
+                    icon={<User size={28} />}
+                    tag="Patient Flow"
                     title="I am a Patient"
-                    description="Report symptoms and get instantly triaged"
-                    color="#0891B2"
+                    description="Log your symptoms and let AI route you to the right specialist instantly."
+                    accentColor={C.teal500}
+                    bgColor="#EFF9FC"
                     onClick={() => nav('/intake')}
                 />
                 <RoleCard
-                    icon={<Stethoscope className="w-10 h-10" />}
+                    icon={<Stethoscope size={28} />}
+                    tag="Doctor / Official"
                     title="I am a Doctor"
-                    description="View patient dashboard and analytics"
-                    color="#164E63"
-                    onClick={() => nav('/dashboard')}
+                    description="Access the government dashboard, patient registry, and outbreak analytics."
+                    accentColor={C.teal700}
+                    bgColor="#EFF9FC"
+                    onClick={() => nav('/doctor')}
                 />
             </div>
+
+            {/* Future: add Researcher, Health Worker roles here */}
         </div>
     );
 }
 
-function RoleCard({ icon, title, description, color, onClick }) {
+function RoleCard({ icon, tag, title, description, accentColor, bgColor, onClick }) {
     return (
         <button
             onClick={onClick}
-            className="w-72 bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:scale-105 active:scale-95 transition-all text-center group cursor-pointer"
+            style={{ width: 280, background: '#FFFFFF', borderRadius: 22, padding: '36px 28px', border: '1.5px solid #E2E8F0', textAlign: 'left', cursor: 'pointer', transition: 'box-shadow 0.2s, transform 0.2s', boxShadow: 'none' }}
+            onMouseOver={e => { e.currentTarget.style.boxShadow = '0 16px 48px rgba(8,145,178,0.12)'; e.currentTarget.style.transform = 'translateY(-5px)'; }}
+            onMouseOut={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)'; }}
         >
-            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-all group-hover:scale-110"
-                style={{ background: `${color}15`, color }}>
+            <div style={{ width: 52, height: 52, borderRadius: 14, background: bgColor, color: accentColor, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 {icon}
             </div>
-            <h3 className="font-heading font-bold text-xl text-slate-900 mb-2">{title}</h3>
-            <p className="text-sm text-slate-500">{description}</p>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: accentColor, marginBottom: 8 }}>{tag}</p>
+            <h3 style={{ fontFamily: "'Lexend', sans-serif", fontSize: 19, fontWeight: 700, color: '#0C3547', marginBottom: 10 }}>{title}</h3>
+            <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.7, marginBottom: 20 }}>{description}</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 13.5, fontWeight: 700, color: accentColor }}>
+                Continue <ChevronRight size={16} />
+            </div>
         </button>
     );
 }
