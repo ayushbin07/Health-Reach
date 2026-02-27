@@ -1,0 +1,10 @@
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Sharma', 'General Medicine', 'Hindi', 0.9);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Iyer', 'Pulmonology', 'Tamil', 0.8);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Khan', 'Emergency Medicine', 'Hindi', 0.95);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Banerjee', 'Infectious Disease', 'Bengali', 0.85);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Patil', 'General Medicine', 'Marathi', 0.88);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Reddy', 'Internal Medicine', 'Telugu', 0.92);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Singh', 'Pulmonology', 'Punjabi', 0.75);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Nair', 'Emergency Medicine', 'Malayalam', 0.91);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Desai', 'General Medicine', 'Gujarati', 0.89);
+INSERT INTO specialists (name, specialty, language, availability_score) VALUES ('Dr. Das', 'Infectious Disease', 'Odia', 0.82);

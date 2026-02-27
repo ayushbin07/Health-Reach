@@ -21,8 +21,18 @@ public class PatientController {
         return patientService.createPatient(patient);
     }
 
+    @PutMapping("/{id}")
+    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patient) {
+        return patientService.updatePatient(id, patient);
+    }
+
     @GetMapping
     public List<Patient> getAllPatients() {
         return patientService.getAllPatients();
+    }
+
+    @GetMapping("/{id}/history")
+    public com.healthreach.healthreach.dto.PatientHistoryDTO getPatientHistory(@PathVariable Long id) {
+        return patientService.getPatientHistory(id);
     }
 }

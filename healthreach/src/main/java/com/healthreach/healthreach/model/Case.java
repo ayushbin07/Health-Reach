@@ -31,6 +31,18 @@ public class Case {
     private Double triageScore;
     private String action;
 
+    // --- Emergency/Routing Details ---
+    private Integer emergencyResponseTime; // in minutes
+
+    // --- Diagnosis Tracking ---
+    private String diagnosis;
+    private Double confidence;
+
+    // --- Outbreak Tracking ---
+    // --- Outbreak Tracking ---
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isOutbreakSpike = Boolean.FALSE;
+
     private LocalDateTime createdAt;
 
     @ManyToOne

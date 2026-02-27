@@ -1,0 +1,93 @@
+### Create Patient 1 (Palghar - Dengue prone)
+POST http://localhost:8080/api/patients
+Content-Type: application/json
+
+{
+  "name": "Ayushi",
+  "age": 20,
+  "gender": "Female",
+  "language": "Tamil",
+  "district": "Palghar"
+}
+
+###
+
+### Update Patient 1 (Update age to 21 and language to English)
+PUT http://localhost:8080/api/patients/1
+Content-Type: application/json
+
+{
+  "age": 21,
+  "language": "English"
+}
+
+###
+
+### Get All Patients
+GET http://localhost:8080/api/patients
+
+###
+
+### 1. Test Emergency Case (Unconscious)
+POST http://localhost:8080/api/cases/1
+Content-Type: application/json
+
+{
+  "language": "Hindi",
+  "fever": true,
+  "unconscious": true
+}
+
+###
+
+### 2. Test Routine Case (TB Diagnosis match: fever + cough > 14 days)
+POST http://localhost:8080/api/cases/1
+Content-Type: application/json
+
+{
+  "fever": true,
+  "cough": true,
+  "coughDurationDays": 15,
+  "breathlessness": false,
+  "unconscious": false
+}
+
+### 
+
+### 3. Test Routine Case (Viral Fever match: fever only)
+POST http://localhost:8080/api/cases/1
+Content-Type: application/json
+
+{
+  "fever": true,
+  "cough": false,
+  "unconscious": false
+}
+
+###
+
+### 4. Create multiple cases in Palghar to trigger Outbreak Spike (> 5 cases)
+POST http://localhost:8080/api/cases/1
+Content-Type: application/json
+
+{
+  "fever": true
+}
+
+### Go click 4 above multiple times to trigger the outbreak logic
+
+### 5. Get Analytics: Case Summary
+GET http://localhost:8080/api/analytics/case-summary
+
+###
+
+### 6. Get Analytics: Outbreaks
+GET http://localhost:8080/api/analytics/outbreaks
+
+###
+
+### 7. Get Patient History
+GET http://localhost:8080/api/patients/1/history
+
+###
+GET http://localhost:8080/api/cases/1
